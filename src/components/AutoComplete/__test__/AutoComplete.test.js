@@ -9,11 +9,12 @@ describe('AutoComplete Component', () => {
     });
 
     it('should change the value in the input when user type', async () => {
-        render(<AutoComplete />);
+        const getSearchTitle = jest.fn();
+        render(<AutoComplete getSearchTitle={getSearchTitle}/>);
         const autoCompleteElement = screen.getByPlaceholderText(/Search The Product/i);
         fireEvent.change(autoCompleteElement, { target: { value: 'week' } });
         expect(autoCompleteElement.value).toBe('week')
-    })
+    });
 })
 
 
