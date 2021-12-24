@@ -17,11 +17,6 @@ function App() {
     fetchData();
   }, [])
 
-  useEffect(() => {
-    setFilterData(makeFilterProducts(allData))
-  }, [searchTitle]);
-
-
   const fetchData = async () => {
     const result = await (await axios.get('http://localhost:3001/products')).data;
     setAllData(result);
@@ -29,13 +24,16 @@ function App() {
   }
 
   const handleSearchTitle = (e) => {
-    setSearchTitle(e);
     if (e.length > 3) {
-      setTimeout(() => {
-        const FilterByTitle = makeFilterProducts(allData);
-        setFilterData(FilterByTitle);
-      }, 300);
+      const filterData = allData.filter((item) => {
+        return item.title.toLowerCase().indexOf(e.toLowerCase()) > -1;
+      });
+      setFilterData(filterData);
     }
+    if(e === '' || e.length <= 3){
+      setFilterData([]);
+    }
+
   }
 
   const makeFilterProducts = (array) => {
@@ -60,10 +58,10 @@ function App() {
   return (
     <div className="App h-100">
       <div className='d-flex h-100'>
-        <div className='sidebar h-100'>
+        <div className='sidebar'>
           <Sidebar />
         </div>
-        <div className='flex-grow-1 flex-column w-100'>
+        <div className='flex-grow-1 d-flex flex-column w-100'>
           <div className='sticky-top'>
             <AutoComplete getSearchTitle={handleSearchTitle} />
           </div>

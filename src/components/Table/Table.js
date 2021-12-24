@@ -2,6 +2,7 @@
 import React from 'react'
 
 export default function Table({ Products = [] }) {
+    console.log(Products.length);
     return (
         <div className='p-2'>
             {
