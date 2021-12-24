@@ -2,12 +2,11 @@
 import React from 'react'
 
 export default function Table({ Products = [] }) {
-    console.log(Products.length);
     return (
         <div className='p-2'>
             {
                 Products.length > 0 ? 
-            <table className="table table-striped">
+            <table className="table table-striped" data-testid="products-table">
                 <thead>
                     <tr>
                         <th>Title</th>

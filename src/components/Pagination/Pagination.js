@@ -8,7 +8,7 @@ export default function Pagination({productsPerPage , totalProducts , paginate ,
     }
     
     return (
-        <nav className='d-flex justify-content-center'>
+        <nav className='d-flex justify-content-center' data-testid="pagination-navbar">
             <ul className='pagination'>
                 {
                     pageNumber.map((number)=>{
