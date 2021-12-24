@@ -27,7 +27,7 @@ const [searchTitle , setSearchTitle] = useState('');
   return (
     <div className="App h-100">
       <div className='d-flex h-100'>
-        <div className='sidebar'>
+        <div className='sidebar h-100'>
           <Sidebar />
         </div>
         <div className='flex-grow-1 flex-column w-100'>
@@ -35,7 +35,7 @@ const [searchTitle , setSearchTitle] = useState('');
             <AutoComplete getSearchTitle={handleSearchTitle}/>
           </div>
           <div className='flex-grow-1 p-2' style={{ msOverflowY: 'auto' }}>
-            <Table />
+            <Table/>
           </div>
         </div>
       </div>
