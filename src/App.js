@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 function App() {
 const [allData , setAllData] = useState([]);
+const [searchTitle , setSearchTitle] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -18,6 +19,11 @@ const [allData , setAllData] = useState([]);
     setAllData(result);
     
   }
+
+  const handleSearchTitle = (e) =>{
+    setSearchTitle(e);
+    console.log(e);
+  }
   return (
     <div className="App h-100">
       <div className='d-flex h-100'>
@@ -26,7 +32,7 @@ const [allData , setAllData] = useState([]);
         </div>
         <div className='flex-grow-1 flex-column w-100'>
           <div className='sticky-top'>
-            <AutoComplete />
+            <AutoComplete getSearchTitle={handleSearchTitle}/>
           </div>
           <div className='flex-grow-1 p-2' style={{ msOverflowY: 'auto' }}>
             <Table />
