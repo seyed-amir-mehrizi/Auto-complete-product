@@ -5,10 +5,13 @@ import AutoComplete from './components/AutoComplete/AutoComplete';
 import Table from './components/Table/Table';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Pagination from './components/Pagination/Pagination';
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [searchTitle, setSearchTitle] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, SetProductsPerPage] = useState(100);
 
   useEffect(() => {
     fetchData();
@@ -33,15 +36,27 @@ function App() {
         setFilterData(FilterByTitle);
       }, 300);
     }
-    // console.log(e);
   }
-
 
   const makeFilterProducts = (array) => {
     return array.filter((item) => {
       return item.title.toLowerCase().includes(searchTitle.toLowerCase());
     })
   }
+
+
+
+  //pagination logic
+
+  const indexOfLastProducts = currentPage * productsPerPage;
+  const indexOfFirstProducts = indexOfLastProducts - productsPerPage;
+  const currentProducts = filterData.slice(indexOfFirstProducts, indexOfLastProducts)
+
+  const paginate = (number) =>{
+    setCurrentPage(number);
+  }
+
+
   return (
     <div className="App h-100">
       <div className='d-flex h-100'>
@@ -53,7 +68,8 @@ function App() {
             <AutoComplete getSearchTitle={handleSearchTitle} />
           </div>
           <div className='flex-grow-1 p-2' style={{ msOverflowY: 'auto' }}>
-            <Table Products={filterData} />
+            <Table Products={currentProducts} />
+            <Pagination paginate={paginate} currentPage={currentPage} totalProducts={filterData.length} productsPerPage={productsPerPage}  />
           </div>
         </div>
       </div>
