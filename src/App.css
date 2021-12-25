@@ -5,3 +5,7 @@
   overflow-y: auto;
   background-color: #e7e9eb !important;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
