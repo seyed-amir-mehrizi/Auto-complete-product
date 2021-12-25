@@ -9,11 +9,11 @@ export default function Pagination({productsPerPage , totalProducts , paginate ,
     
     return (
         <nav className='d-flex justify-content-center' data-testid="pagination-navbar">
-            <ul className='pagination'>
+            <ul className='pagination flex-wrap'>
                 {
                     pageNumber.map((number)=>{
                         const activeClass = currentPage === number ? 'active' : '';
-                        return <li key={number} className={`page-item ${activeClass}`} onClick={()=>paginate(number)}>
+                        return <li key={number} className={`m-1 page-item ${activeClass}`} onClick={()=>paginate(number)}>
                             <a href='!#' className="page-link">
                                 {number}
                             </a>
