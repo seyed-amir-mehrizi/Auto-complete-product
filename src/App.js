@@ -30,7 +30,7 @@ function App() {
       });
       setFilterData(filterData);
     }
-    if(e === '' || e.length <= 3){
+    if (e === '' || e.length <= 3) {
       setFilterData([]);
     }
 
@@ -50,24 +50,27 @@ function App() {
   const indexOfFirstProducts = indexOfLastProducts - productsPerPage;
   const currentProducts = filterData.slice(indexOfFirstProducts, indexOfLastProducts)
 
-  const paginate = (number) =>{
+  const paginate = (number) => {
     setCurrentPage(number);
   }
 
 
   return (
-    <div className="App h-100">
-      <div className='d-flex h-100'>
-        <div className='sidebar'>
-          <Sidebar />
-        </div>
-        <div className='flex-grow-1 d-flex flex-column w-100'>
-          <div className='sticky-top'>
-            <AutoComplete getSearchTitle={handleSearchTitle} />
+    <div className='h-100'>
+      <div className="main-app h-100">
+        <div className="d-flex h-100">
+          <div className="sidebar">
+            <Sidebar />
+
           </div>
-          <div className='flex-grow-1 p-2' style={{ msOverflowY: 'auto' }}>
-            <Table Products={currentProducts} />
-            <Pagination paginate={paginate} currentPage={currentPage} totalProducts={filterData.length} productsPerPage={productsPerPage}  />
+          <div className="flex-grow-1 d-flex flex-column w-100">
+            <div className="sticky-top">
+              <AutoComplete getSearchTitle={handleSearchTitle} />
+            </div>
+            <div className="content-body flex-grow-1 p-2" style={{ overflowY: "auto" }}>
+              <Table Products={currentProducts} />
+              <Pagination paginate={paginate} currentPage={currentPage} totalProducts={filterData.length} productsPerPage={productsPerPage} />
+            </div>
           </div>
         </div>
       </div>
