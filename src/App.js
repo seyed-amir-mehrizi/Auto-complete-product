@@ -15,46 +15,31 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, SetProductsPerPage] = useState(100);
   const [gender, setGender] = useState('male');
-  const [isOnSale , setIsOnSale] = useState(false)
+  const [isOnSale, setIsOnSale] = useState(false)
 
   useEffect(() => {
     fetchData();
   }, [])
   useEffect(() => {
+    if (searchTitle.length <= 2) {
+      setFilterData([]);
+    }
     const result = allData.filter((item) => {
-      return  (item.gender === gender) &&
+      return (item.gender === gender) &&
         (!searchTitle || item.title.toLowerCase().includes(searchTitle.toLowerCase())) &&
-        (isOnSale ? item.sale_price.split(' ')[0] < item.price.split(' ')[0] : item)
+        (isOnSale ? item.sale_price.split(' ')[0] < item.price.split(' ')[0] : item.sale_price.split(' ')[0] >= item.price.split(' ')[0])
     });
     setFilterData(result)
-  }, [gender, searchTitle , isOnSale])
 
-
-
+  }, [gender, searchTitle, isOnSale])
   const fetchData = async () => {
     const result = await (await axios.get('http://localhost:3001/products')).data;
     setAllData(result);
 
   }
-
   const handleSearchTitle = (e) => {
-    if (e.length > 3) {
-      setSearchTitle(e)
-    }
-    if (e === '' || e.length <= 3) {
-      setFilterData([]);
-      setSearchTitle('');
-    }
-
+    setSearchTitle(e);
   }
-
-  const makeFilterProducts = (array) => {
-    return array.filter((item) => {
-      return item.title.toLowerCase().includes(searchTitle.toLowerCase()) || item.gender === gender;
-    })
-  }
-
-
 
   //pagination logic
 
