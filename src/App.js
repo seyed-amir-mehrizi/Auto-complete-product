@@ -1,13 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import Sidebar from './components/Sidebar/Sidebar';
-import AutoComplete from './components/AutoComplete/AutoComplete';
-import Table from './components/Table/Table';
-import { useEffect, useState } from 'react';
+
+import React ,{ useEffect, useState } from 'react';
 import axios from 'axios';
-import Pagination from './components/Pagination/Pagination';
-import Dropdown from './components/Dropdown/Dropdown';
-import Checkbox from './components/Checkbox/Checkbox';
+import './App.css';
+const AutoComplete = React.lazy(()=>import('./components/AutoComplete/AutoComplete'));
+const Table = React.lazy(()=>import('./components/Table/Table'));
+const Pagination = React.lazy(()=>import('./components/Pagination/Pagination'));
+const Dropdown = React.lazy(()=>import('./components/Dropdown/Dropdown'));
+const Checkbox = React.lazy(()=>import('./components/Checkbox/Checkbox'));
+
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
@@ -27,7 +27,7 @@ function App() {
     const result = allData.filter((item) => {
       return (item.gender === gender) &&
         (!searchTitle || item.title.toLowerCase().includes(searchTitle.toLowerCase())) &&
-        (isOnSale ? item.sale_price.split(' ')[0] < item.price.split(' ')[0] : item.sale_price.split(' ')[0] >= item.price.split(' ')[0])
+        (isOnSale ? Number(item.sale_price.split(' ')[0]) < Number(item.price.split(' ')[0]) : Number(item.sale_price.split(' ')[0]) >= Number(item.price.split(' ')[0]))
     });
     setFilterData(result)
 
