@@ -2,11 +2,11 @@
 import React ,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
-const AutoComplete = React.lazy(()=>import('./components/AutoComplete/AutoComplete'));
-const Table = React.lazy(()=>import('./components/Table/Table'));
-const Pagination = React.lazy(()=>import('./components/Pagination/Pagination'));
-const Dropdown = React.lazy(()=>import('./components/Dropdown/Dropdown'));
-const Checkbox = React.lazy(()=>import('./components/Checkbox/Checkbox'));
+const AutoComplete = React.lazy(()=>import('../AutoComplete/AutoComplete'));
+const Table = React.lazy(()=>import('../Table/Table'));
+const Pagination = React.lazy(()=>import('../Pagination/Pagination'));
+const Dropdown = React.lazy(()=>import('../Dropdown/Dropdown'));
+const Checkbox = React.lazy(()=>import('../Checkbox/Checkbox'));
 
 function App() {
   const [allData, setAllData] = useState([]);
