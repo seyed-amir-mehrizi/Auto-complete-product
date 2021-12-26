@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react'
-import { FiChevronDown , FiChevronUp } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 
 export default function Table({ Products = [] }) {
+    console.log(window.history);
     const [imageDetailShown, setImageDetailShown] = useState([]);
 
     const toggleRow = (gtin) => {
@@ -37,11 +38,11 @@ export default function Table({ Products = [] }) {
                             {
                                 Products.map((product) => {
                                     return <>
-                                        <tr key={product.gtin} onClick={()=>toggleRow(product.gtin)} className='cursor-pointer'>
+                                        <tr key={product.gtin} onClick={() => toggleRow(product.gtin)} className='cursor-pointer'>
                                             <td>
-                                           {
-                                                imageDetailShown.includes(product.gtin) ? <FiChevronUp /> : <FiChevronDown />
-                                           }
+                                                {
+                                                    imageDetailShown.includes(product.gtin) ? <FiChevronUp /> : <FiChevronDown />
+                                                }
                                             </td>
                                             <td>{product.title}</td>
                                             <td>{product.gtin}</td>
@@ -67,11 +68,9 @@ export default function Table({ Products = [] }) {
                                                         }
                                                     </td>
                                                 </tr> : null
-
                                         }
 
                                     </>
-
                                 })
                             }
 
