@@ -2,12 +2,11 @@
 import React ,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
-const AutoComplete = React.lazy(()=>import('./components/AutoComplete/AutoComplete'));
-const Table = React.lazy(()=>import('./components/Table/Table'));
-const Pagination = React.lazy(()=>import('./components/Pagination/Pagination'));
-const Dropdown = React.lazy(()=>import('./components/Dropdown/Dropdown'));
-const Checkbox = React.lazy(()=>import('./components/Checkbox/Checkbox'));
-
+import Checkbox from './components/Checkbox/Checkbox';
+import Table from './components/Table/Table';
+import Dropdown from './components/Dropdown/Dropdown';
+import Pagination from './components/Pagination/Pagination';
+import AutoComplete from './components/AutoComplete/AutoComplete'
 function App() {
   const [allData, setAllData] = useState([]);
   const [filterData, setFilterData] = useState([]);
@@ -32,9 +31,14 @@ function App() {
     setFilterData(result)
 
   }, [gender, searchTitle, isOnSale])
+  
   const fetchData = async () => {
-    const result = await (await axios.get('http://localhost:3001/products')).data;
-    setAllData(result);
+    try {      
+      const result = await (await axios.get('http://localhost:3001/products')).data;
+      setAllData(result);
+    } catch (error) {
+      console.log(error)
+    }
 
   }
   const handleSearchTitle = (e) => {
