@@ -15,7 +15,7 @@ export default function Pagination({ productsPerPage, totalProducts, paginate, c
                         const activeClass = currentPage === number ? 'active' : '';
                         return <li key={number} className={`m-1 page-item ${activeClass}`}
                             onClick={() => paginate(number)}>
-                            <a href='!#' className="page-link" data-testid={`anchor-item`}>
+                            <a  className="page-link cursor-pointer" data-testid={`anchor-item`}>
                                 {number}
                             </a>
                         </li>

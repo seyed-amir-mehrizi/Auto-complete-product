@@ -1,5 +1,5 @@
 
-import React ,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Checkbox from './components/Checkbox/Checkbox';
@@ -31,9 +31,9 @@ function App() {
     setFilterData(result)
 
   }, [gender, searchTitle, isOnSale])
-  
+
   const fetchData = async () => {
-    try {      
+    try {
       const result = await (await axios.get('http://localhost:3001/products')).data;
       setAllData(result);
     } catch (error) {
@@ -47,9 +47,13 @@ function App() {
 
   //pagination logic
 
-  const indexOfLastProducts = currentPage * productsPerPage;
-  const indexOfFirstProducts = indexOfLastProducts - productsPerPage;
-  const currentProducts = filterData.slice(indexOfFirstProducts, indexOfLastProducts)
+  const calculatePagination = () => {
+    const indexOfLastProducts = currentPage * productsPerPage;
+    const indexOfFirstProducts = indexOfLastProducts - productsPerPage;
+    const currentProducts = filterData.slice(indexOfFirstProducts, indexOfLastProducts)
+    return currentProducts;
+  }
+
 
   const paginate = (number) => {
     setCurrentPage(number);
@@ -61,11 +65,11 @@ function App() {
     setGender(gender)
   }
 
+
   // filtering by checkbox
 
-  const handleChangeSale = (e) => {
-    setIsOnSale(e)
-    // console.log(e);
+  const handleChangeSale = (isSale) => {
+    setIsOnSale(isSale)
   }
 
 
@@ -83,7 +87,7 @@ function App() {
               <AutoComplete getSearchTitle={handleSearchTitle} />
             </div>
             <div className="content-body flex-grow-1 p-2" style={{ overflowY: "auto" }}>
-              <Table Products={currentProducts} />
+              <Table Products={calculatePagination()} />
               <Pagination paginate={paginate} currentPage={currentPage} totalProducts={filterData.length} productsPerPage={productsPerPage} />
             </div>
           </div>

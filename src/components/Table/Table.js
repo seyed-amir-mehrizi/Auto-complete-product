@@ -4,7 +4,6 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 
 export default function Table({ Products = [] }) {
-    console.log(window.history);
     const [imageDetailShown, setImageDetailShown] = useState([]);
 
     const toggleRow = (gtin) => {
@@ -37,8 +36,8 @@ export default function Table({ Products = [] }) {
                         <tbody>
                             {
                                 Products.map((product) => {
-                                    return <>
-                                        <tr key={product.gtin} onClick={() => toggleRow(product.gtin)} className='cursor-pointer'>
+                                    return <React.StrictMode key={product.gtin}>
+                                        <tr onClick={() => toggleRow(product.gtin)} className='cursor-pointer'>
                                             <td>
                                                 {
                                                     imageDetailShown.includes(product.gtin) ? <FiChevronUp /> : <FiChevronDown />
@@ -70,7 +69,7 @@ export default function Table({ Products = [] }) {
                                                 </tr> : null
                                         }
 
-                                    </>
+                                    </React.StrictMode>
                                 })
                             }
 
