@@ -1,7 +1,6 @@
-import { create } from 'react-test-renderer';
-import React, { Suspense } from 'react';
+
+import React from 'react';
 import App from './App';
-import Checkbox from './components/Checkbox/Checkbox'
 import Table from './components/Table/Table'
 import { render, screen, fireEvent } from '@testing-library/react';
 
